@@ -1,0 +1,31 @@
+version: '3.4'
+services:
+
+  ganache-cli:
+      image: trufflesuite/ganache-cli
+      container_name: ganache-cli
+      ports:
+        - "8545:8545"
+        
+  truffle3:
+      build: .
+      depends_on:
+        - "ganache-cli"
+
+      command: /wait-for-it ganache-cli:8545 --timeout=30 -- sh -c "truffle migrate --network 'docker'; npm run dev -- --colors --inline --hot --watch --progress --host 0.0.0.0 --public 0.0.0.0:8080"
+
+      stdin_open: true
+      tty: true
+      ports:
+        - "0.0.0.0:8080:8080"
+
+      volumes:
+        - "./app:/code/app"
+        - ./app_scenario_1:/code/app_scenario_1
+        - ./app_scenario_2:/code/app_scenario_2
+        - ./app_scenario_3:/code/app_scenario_3
+#       - type: bind
+#         source: .
+#         target: /code  ## better if /src in Dockerfile
+
+
