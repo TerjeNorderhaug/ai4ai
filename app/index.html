@@ -95,12 +95,13 @@ Copyright: BlockTEST LLC
          <div class="card-body">
            <h5 class="card-title">Authenticate</h5>
            <div class="alert alert-info">
-             <!--<span id="legiStatus" style="background-color:#FFFF99;font-size:80%"></span>-->
+             <span id="legiStatus"></span>
            </div>
            <div class "form-group mb-3">
              <div class="custom-file">
                <label class="custom-file-label" for="legiFile" style="width:15em">Agreement</label>
                <input class="custom-file-input" type="file" id="legiFile"
+                      value="legal_agreement.docx"
                       accept="*.*" onChange="App.openLegalFile(event)"></input>
              </div>
            </div>
@@ -113,8 +114,9 @@ Copyright: BlockTEST LLC
              <input class="form-control" type="text" id="hashSign" readonly="true"></input>
            </div>
            <div class="form-group">
-             <label for="fileURL">File URL:</label>
+             <label for="fileURL">Agreement URL:</label>
              <input class="form-control" type="text" id="fileURL"
+                    value="https://github.com/TerjeNorderhaug/ai4ai/blob/master/legal_agreement.docx"
                     placeholder="Save agreement to cloud, and input share link here"></input>
            </div>
            <div class="form-group">
@@ -381,6 +383,7 @@ Copyright: BlockTEST LLC
          </div>
        </div>
      </div>
+     <div style="height: 10em">&nbsp</div>
    </div>
 
    <footer class="fixed-bottom" style="padding-bottom:0">
