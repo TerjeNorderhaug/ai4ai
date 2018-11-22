@@ -91,10 +91,10 @@ const App = {
       }
       else {
         const legiStatus = document.getElementById('legiStatus')
-        legiStatus.innerHTML = "Please sign agreement before use the Drug R&D Ecosystem!"
+        legiStatus.innerHTML = "Please sign agreement before using the Drug R&D Ecosystem!"
         document.getElementById('hashCode').value = ""
         document.getElementById('hashSign').value = ""
-        document.getElementById('fileURL').value = ""
+        /*document.getElementById('fileURL').value = ""*/
 
         document.getElementById('loyaltyTokenPanel').style.display = 'none'
         document.getElementById('taskManagementPanel').style.display = 'none'
@@ -259,16 +259,16 @@ const App = {
 
   saveFile: function(filename, data) {
     let blob = new Blob([data], {type: "application/octet-stream"});
-  
+
     if(window.navigator.msSaveOrOpenBlob) {
         window.navigator.msSaveBlob(blob, filename);
     }
     else{
         var elem = window.document.createElement('a');
         elem.href = window.URL.createObjectURL(blob);
-        elem.download = filename;        
+        elem.download = filename;
         document.body.appendChild(elem);
-        elem.click();        
+        elem.click();
         document.body.removeChild(elem);
     }
   },
@@ -324,7 +324,7 @@ const App = {
     else {
       dataEncryptHash = document.getElementById('playerDataDecryptHash')
     }
-  
+
     /* verify data file with hash */
     if (0 != dataEncryptHash.value.localeCompare(hashResult)) {
       alert("BE CAREFUL! Data file hash is NOT consistent with hash on blockchain!")
@@ -477,7 +477,7 @@ getDataInfo: function() {
       return taskInstance.initiateTask(initToolName, initMaxPlayer,
                                        web3.toWei(initPlayerSalary, "ether"),
                                        {from: account, value: totalSalary})
-    }).then(function () {   
+    }).then(function () {
       self.setStatus('Initialization complete!')
     }).catch(function (e) {
       console.log(e)
@@ -521,10 +521,10 @@ getDataInfo: function() {
           const playerDate = new Date(player[5].valueOf()*1000)
           const playerText = "<strong>id:</strong>" + i +
                              " <strong>address:</strong>" + player[0] +
-                             " <strong>inputId:</strong>" + player[1] + 
-                             " <strong>outputId:</strong>" + player[2] + 
-                             " <strong>result:</strong>" + web3.fromWei(player[3], "ether") + 
-                             " <strong>status:</strong>" + player[4] + 
+                             " <strong>inputId:</strong>" + player[1] +
+                             " <strong>outputId:</strong>" + player[2] +
+                             " <strong>result:</strong>" + web3.fromWei(player[3], "ether") +
+                             " <strong>status:</strong>" + player[4] +
                              " <strong>date:</strong>" + playerDate.toISOString()
           const ul = document.getElementById("playerList")
           const li = document.createElement("li")

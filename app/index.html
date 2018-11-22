@@ -64,9 +64,9 @@ Copyright: BlockTEST LLC
               aria-controls="profile" aria-selected="false">Tokens</a>
          </li>
          <li class="nav-item">
-           <a class="nav-link" id="contact-tab" data-toggle="tab"
-              href="#taskManagementPanel" role="tab"
-              aria-controls="taskManagementPanel" aria-selected="false">Tasks</a>
+           <a class="nav-link" id="tasks-tab" data-toggle="tab"
+              href="#tasks-pane" role="tab"
+              aria-controls="tasks-pane" aria-selected="false">Tasks</a>
          </li>
        </ul>
        </div>
@@ -111,11 +111,13 @@ Copyright: BlockTEST LLC
            </div>
            <div class="form-group">
              <label for="hashSign">Hash Signature:</label>
-             <input class="form-control" type="text" id="hashSign" readonly="true"></input>
+             <input class="form-control" type="text" id="hashSign" readonly="true"
+                    placeholder="Filled in after confirming the agreement in MetaMask"></input>
            </div>
            <div class="form-group">
              <label for="fileURL">Agreement URL:</label>
              <input class="form-control" type="text" id="fileURL"
+                    defaultValue="https://github.com/TerjeNorderhaug/ai4ai/blob/master/legal_agreement.docx"
                     value="https://github.com/TerjeNorderhaug/ai4ai/blob/master/legal_agreement.docx"
                     placeholder="Save agreement to cloud, and input share link here"></input>
            </div>
@@ -134,12 +136,12 @@ Copyright: BlockTEST LLC
      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
        <div class="card" id="loyaltyTokenPanel">
          <div class="card-body">
-           <h3 class="card-title">Loyalty Token Management</h3>
+           <!-- <h3 class="card-title">Loyalty Token Management</h3>-->
            <div class="row">
              <div class="col" id="tokenInitialization">
                <div class="card">
                  <div class="card-body">
-                   <h5 class="card-title">Initialization</h5>
+                   <h5 class="card-title">Loyalty Token Initialization</h5>
                    <label for="initSupply">Total Supply:</label>
                    <input class="form-control" type="text" id="initSupply" placeholder="e.g., 1000000"></input>
                    <div class="form-group">
@@ -198,10 +200,10 @@ Copyright: BlockTEST LLC
        </div>
      </div>
 
-     <!-- Task Management Panel -->
-     <div class="tab-pane fade" role="tabpanel" aria-labelledby="contact-tab"
-          id="taskManagementPanel">
-       <div class="card">
+     <!-- Tasks Pane -->
+     <div class="tab-pane fade" role="tabpanel" aria-labelledby="tasks-tab"
+          id="tasks-pane">
+       <div class="card" id="taskManagementPanel">
          <div class="card-body">
            <h1 class="card-title">Task Management</h1>
            <div id="taskInitialization">
