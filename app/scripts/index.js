@@ -76,7 +76,7 @@ const App = {
       if (result[4]) {
         const legiStatus = document.getElementById('legiStatus')
         legiStatus.innerHTML = "You have signed the agreement for using the Drug R&D Ecosystem!"
-        legiStatus.style.backgroundColor = "#CCFFCC"
+        /* legiStatus.style.backgroundColor = "#CCFFCC" */
 
         /* Extract agreement info from blockchain */
         document.getElementById('sign').disabled = true

@@ -37,22 +37,6 @@ Copyright: BlockTEST LLC
      </a>
 
      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-       <!--
-       <ul class="navbar-nav nav-tabs mr-auto" role="tablist">
-         <li class="nav-item">
-           <a class="nav-link active" data-toggle="tab" href="#nav-tokens" id="nav-tokens-tab"
-             aria-controls="nav-tokens" aria-selected="true">
-             Tokens<span class="sr-only">(current)</span>
-           </a>
-         </li>
-         <li class="nav-item">
-           <a class="nav-link" data-toggle="tab" href="#nav-tasks" id="nav-tasks-tab"
-             aria-controls="nav-tasks" aria-selected="false">
-             Tasks
-           </a>
-         </li>
-       </ul>
--->
       <div>
        <ul class="navbar-nav nav nav-pills" id="myTab" role="tablist">
          <li class="nav-item">
@@ -67,6 +51,11 @@ Copyright: BlockTEST LLC
            <a class="nav-link" id="tasks-tab" data-toggle="tab"
               href="#tasks-pane" role="tab"
               aria-controls="tasks-pane" aria-selected="false">Tasks</a>
+         </li>
+         <li class="nav-item">
+           <a class="nav-link" id="steps-tab" data-toggle="tab"
+              href="#steps-pane" role="tab"
+              aria-controls="steps-pane" aria-selected="false">Steps</a>
          </li>
        </ul>
        </div>
@@ -94,8 +83,11 @@ Copyright: BlockTEST LLC
        <div class="card" id="legitimationPanel">
          <div class="card-body">
            <h5 class="card-title">Authenticate</h5>
-           <div class="alert alert-info">
+           <div class="alert alert-info alert-dismissible">
              <span id="legiStatus"></span>
+             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+             </button>
            </div>
            <div class "form-group mb-3">
              <div class="custom-file">
@@ -254,9 +246,16 @@ Copyright: BlockTEST LLC
              <input class="form-control" type="text" id="playerId"
                     placeholder="Player ID to be approved"></input>
            </div>
+         </div>
+       </div>
+     </div>
 
-           <div id="toolPlayerPanel">
-             <br><br>
+     <!-- Steps pane -->
+     <div class="tab-pane fade" role="tabpanel" aria-labelledby="steps-tab"
+          id="steps-pane">
+       <div class="card" id="toolPlayerPanel">
+         <div class="card-body">
+           <div>
              <h2>For Tool Player:</h2>
              <br>
              <h3>Step 1: generate data access code,
@@ -315,15 +314,20 @@ Copyright: BlockTEST LLC
              <button class="btn btn-primary" id="submitPlayerResult"
                      onclick="App.submitPlayerResult()">Submit Player Result</button>
            </div>
+         </div>
+       </div>
 
-           <div id="taskOwnerPanel">
-             <br><br>
-             <h2>For Task Owner:</h2>
-             <br>
-             <h3>Step 1: generate data access code, enter player id,
+       <div class="card" id="taskOwnerPanel">
+         <div class="card-body">
+           <div>
+             <div class="card-title">For Task Owner:</div>
+
+             <div class="card" id="ownerEncryptPanel">
+               <p class="card-header">
+               Step 1: Generate data access code, enter player id,
                encrypt input data, upload encrypted data to cloud,
-               then approve player request</h3>
-             <div id="ownerEncryptPanel">
+               then approve player request.</p>
+
                <button class="btn btn-primary" id="getOwnerEncryptCode"
                        onclick="App.getEncryptCode()">Locate Data Request</button>
                <div class="form-group">
@@ -336,6 +340,7 @@ Copyright: BlockTEST LLC
                           onChange="App.openDataFile(event)"></input>
                  </div>
                </div>
+
                <button class="btn btn-primary" id="encryptDataFile"
                        onclick="App.encryptDataFile()">Encrypt Data</button>
                <label for="ownerDataEncryptHash">Encrypted Data Hash:</label>
@@ -344,35 +349,40 @@ Copyright: BlockTEST LLC
                <label for="ownerDataEncryptURL">Data Cloud URL:</label>
                <input class="form-control" type="text" id="ownerDataEncryptURL"
                       placeholder="Save encrypted file to cloud, and input share link here"></input>
-             </div>
-             <button class="btn btn-primary" id="approvePlayerRequest"
-                     onclick="App.approvePlayerRequest()">Approve Player Request</button>
 
-             <h3>Step 2: enter data access code and player id,
-               locate result data, decrypt result data,
-               validate result with the value,
-               then approve/reject player result</h3>
-             <div id="ownerDecryptPanel">
-               <button class="btn btn-primary" id="getDataInfo"
-                       onclick="App.getDataInfo()">Locate Result Data</button>
-               <div class="form-group">
-                 <label for="ownerDataDecryptURL">Data Cloud URL:</label>
-                 <input class="form-control" type="text" id="ownerDataDecryptURL" readonly="true"
-                        placeholder="will show after encrypting data"></input>
-                 <label for="ownerDataDecryptHash">Encrypted Data Hash:</label>
-                 <input class="form-control" type="text" id="ownerDataDecryptHash" readonly="true"
-                        placeholder="will show after encrypting data"></input>
-               </div>
-               <div class="custom-file">
-                 <label class="custom-file-label" for="openEncryptedFile">Data File:</label>
-                 <input class="custom-file-input" type="file" id="openEncryptedFile" accept="*.*"
-                        onChange="App.openDataFile(event)"></input>
-               </div>
-               <button class="btn btn-primary" id="decryptDataFile"
-                       onclick="App.decryptDataFile()">Decrypt Data</button>
+               <button class="btn btn-primary" id="approvePlayerRequest"
+                       onclick="App.approvePlayerRequest()">
+                 Approve Player Request</button>
+
              </div>
 
-             <div>
+             <div class="card card">
+               <p class="card-header">
+                 Step 2: enter data access code and player id,
+                 locate result data, decrypt result data,
+                 validate result with the value,
+                 then approve/reject player result.</p>
+               <div id="ownerDecryptPanel">
+                 <button class="btn btn-primary" id="getDataInfo"
+                         onclick="App.getDataInfo()">Locate Result Data</button>
+                 <div class="form-group">
+                   <label for="ownerDataDecryptURL">Data Cloud URL:</label>
+                   <input class="form-control" type="text" id="ownerDataDecryptURL" readonly="true"
+                          placeholder="will show after encrypting data"></input>
+                   <label for="ownerDataDecryptHash">Encrypted Data Hash:</label>
+                   <input class="form-control" type="text" id="ownerDataDecryptHash" readonly="true"
+                          placeholder="will show after encrypting data"></input>
+                 </div>
+                 <div class="custom-file">
+                   <label class="custom-file-label" for="openEncryptedFile">Data File:</label>
+                   <input class="custom-file-input" type="file" id="openEncryptedFile" accept="*.*"
+                          onChange="App.openDataFile(event)"></input>
+                 </div>
+                 <button class="btn btn-primary" id="decryptDataFile"
+                         onclick="App.decryptDataFile()">Decrypt Data</button>
+               </div>
+
+               <div>
                <label for="ownerResult">Result Value:</label>
                <input class="form-control" type="text" id="ownerResult" readonly="true"
                       placeholder="will show after encrypting data"></input>
@@ -380,11 +390,13 @@ Copyright: BlockTEST LLC
                        onclick="App.approvePlayerResult()">Approve Player Result</button>
                <button class="btn btn-primary" id="rejectPlayerResult"
                        onclick="App.rejectPlayerResult()">Reject Player Result</button>
+               </div>
              </div>
            </div>
          </div>
        </div>
      </div>
+
      <div style="height: 10em">&nbsp</div>
    </div>
 
