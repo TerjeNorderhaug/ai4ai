@@ -199,7 +199,7 @@ Copyright: BlockTEST LLC
                      <input class="form-control" type="text" id="receiver"
                             placeholder="e.g., 0xdf8114c4f533f72ea1bafafb7ca1836c54dbd3cc"></input>
                    </div>
-                   <button class="btn btn-secondary" id="sendToken"
+                   <button class="btn btn-primary" id="sendToken"
                            onclick="App.sendLoyaltyToken()">Send</button>
                  </div>
                </div>
@@ -358,7 +358,7 @@ Copyright: BlockTEST LLC
              <!-- For Task Owner: -->
              <div class="card" id="ownerEncryptPanel">
                <div class="card-header">
-                 <h4 class="card-title">Step 1</h4>
+                 <h4 class="card-title">Step 1: Process Request</h4>
                  <div class="alert alert-info">
                    Task owner should generate data access code, enter player id,
                    encrypt input data, upload encrypted data to cloud,
@@ -401,9 +401,9 @@ Copyright: BlockTEST LLC
                    <div class="form-group">
                      <input class="form-control" type="text" id="ownerDataEncryptURL"
                             placeholder="Save encrypted file to cloud, and input share link here"></input>
-                     <button class="btn btn-primary" id="approvePlayerRequest"
+                     <button class="btn btn-success" id="approvePlayerRequest"
                              onclick="App.approvePlayerRequest()">
-                       Approve Player Request</button>
+                       Approve</button>
                    </div>
                  </p>
                </div>
@@ -413,12 +413,12 @@ Copyright: BlockTEST LLC
            <div class="col-md-6">
              <div class="card">
                <div class="card-header">
-                 <h4 class="card-title">Step 2</h4>
+                 <h4 class="card-title">Step 2: Process Result</h4>
                  <div class="alert alert-info">
                    Task owner should enter data access code and player id,
                    locate result data, decrypt result data,
                    validate result with the value,
-                   then approve/reject player result.</div>
+                   then approve/reject the result.</div>
                </div>
                <div class="card-body">
                  <div id="ownerDecryptPanel">

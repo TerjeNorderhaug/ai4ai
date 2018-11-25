@@ -24,8 +24,5 @@ services:
         - ./app_scenario_1:/code/app_scenario_1
         - ./app_scenario_2:/code/app_scenario_2
         - ./app_scenario_3:/code/app_scenario_3
-#       - type: bind
-#         source: .
-#         target: /code  ## better if /src in Dockerfile
 
 
