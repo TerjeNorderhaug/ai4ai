@@ -398,12 +398,15 @@ Copyright: BlockTEST LLC
 
                  <p>
                    <label for="ownerDataEncryptURL">Data Cloud URL:</label>
-                   <div class="form-group">
+                   <div class="input-group mb-3">
                      <input class="form-control" type="text" id="ownerDataEncryptURL"
                             placeholder="Save encrypted file to cloud, and input share link here"></input>
-                     <button class="btn btn-success" id="approvePlayerRequest"
-                             onclick="App.approvePlayerRequest()">
-                       Approve</button>
+                     <div class="input-group-append">
+                       <button class="btn btn-success" id="approvePlayerRequest"
+                               type="button"
+                               onclick="App.approvePlayerRequest()">
+                         Approve</button>
+                     </div>
                    </div>
                  </p>
                </div>
