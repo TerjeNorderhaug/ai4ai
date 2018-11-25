@@ -1,5 +1,9 @@
 # AI4AI
 
+## DEMO
+
+[Live working prototype](https://www.predictablywell.com/demo/ai4ai) with responsive design for mobile or web browser.
+
 ## QUICK START
 
 Assuming docker is installed on your computer and this is your working directory,
