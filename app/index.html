@@ -24,11 +24,12 @@ Copyright: BlockTEST LLC
   <script src="./app.js"></script>
 </head>
 <body>
-   <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+   <nav class="navbar navbar-expand-sm navbar-light bg-light sticky-top">
 
      <button class="navbar-toggler" type="button"
              data-toggle="collapse" data-target="#navbarSupportedContent"
-             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+             aria-controls="navbarSupportedContent" aria-expanded="false"
+             aria-label="Toggle navigation">
        <span class="navbar-toggler-icon"></span>
      </button>
 
@@ -41,7 +42,7 @@ Copyright: BlockTEST LLC
        <ul class="navbar-nav nav nav-pills" id="myTab" role="tablist">
          <li class="nav-item">
            <a class="nav-link active" id="home-tab" data-toggle="tab"
-              href="#home" role="tab" aria-controls="home" aria-selected="true">Legitimation</a>
+              href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
          </li>
          <li class="nav-item">
            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
@@ -60,80 +61,82 @@ Copyright: BlockTEST LLC
        </ul>
        </div>
      </div>
-     <!--
-       <form class="form-inline my-2 my-lg-0">
-         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-       </form>
-       -->
    </nav>
 
-   <div class="container-fluid" style="margin: 0; padding: 0">
+   <div class="tab-content container-fluid" style="margin: 0; padding: 0">
 
-   <!--
-   <div class="tab-content" id="myTabContent" style="font-size: 3em">
-     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">Home</div>
-     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">Profile</div>
-     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Contact</div>
-   </div>
-   -->
+     <!-- Authenticate pane -->
+     <div class="tab-pane fade show active" id="home" role="tabpanel"
+          aria-labelledby="home-tab">
 
-   <div class="tab-content">
-     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-       <div class="card" id="legitimationPanel">
-         <div class="card-body">
-           <h5 class="card-title">Authenticate</h5>
-           <div class="alert alert-info alert-dismissible">
-             <span id="legiStatus"></span>
-             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-               <span aria-hidden="true">&times;</span>
-             </button>
-           </div>
-           <div class "form-group mb-3">
-             <div class="custom-file">
-               <label class="custom-file-label" for="legiFile" style="width:15em">Agreement</label>
-               <input class="custom-file-input" type="file" id="legiFile"
-                      value="legal_agreement.docx"
-                      accept="*.*" onChange="App.openLegalFile(event)"></input>
+       <div class="modal fade" id="legitimationPanel" role="dialog"
+            tabindex="-1">
+         <div class="modal-dialog" role="document">
+           <div class="modal-content">
+             <div class="modal-header">
+               <h5 class="modal-title">Authenticate</h5>
              </div>
-           </div>
-           <div class="form-group">
-             <label for="hashCode">SHA-256 Hash:</label>
-             <input class="form-control" type="text" id="hashCode" readonly="true"></input>
-           </div>
-           <div class="form-group">
-             <label for="hashSign">Hash Signature:</label>
-             <input class="form-control" type="text" id="hashSign" readonly="true"
-                    placeholder="Filled in after confirming the agreement in MetaMask"></input>
-           </div>
-           <div class="form-group">
-             <label for="fileURL">Agreement URL:</label>
-             <input class="form-control" type="text" id="fileURL"
-                    defaultValue="https://github.com/TerjeNorderhaug/ai4ai/blob/master/legal_agreement.docx"
-                    value="https://github.com/TerjeNorderhaug/ai4ai/blob/master/legal_agreement.docx"
-                    placeholder="Save agreement to cloud, and input share link here"></input>
-           </div>
-           <div class="form-group">
-             <button class="btn btn-primary" type="button" id="sign" onclick="App.signAgreement()">
-               Sign Agreement
-             </button>
+             <div class="modal-body">
+               <div class="alert alert-info alert-dismissible">
+                 <span id="legiStatus">
+                   Requires MetaMask for authentication.
+                 </span>
+                 <button type="button" class="close" data-dismiss="alert"
+                         aria-label="Close">
+                   <span aria-hidden="true">&times;</span>
+                 </button>
+               </div>
+               <div class "input-group mb-3">
+                 <div class="custom-file">
+                   <label class="custom-file-label" for="legiFile"
+                          style="width:15em">Agreement</label>
+                   <input class="custom-file-input" type="file" id="legiFile"
+                          accept="*.*" onChange="App.openLegalFile(event)"></input>
+                 </div>
+               </div>
+               <div class="form-group mb-3">
+                 <label for="hashCode">SHA-256 Hash:</label>
+                 <input class="form-control" type="text" id="hashCode"
+                        readonly="true"></input>
+               </div>
+               <div class="form-group">
+                 <label for="hashSign">Hash Signature:</label>
+                 <input class="form-control" type="text" id="hashSign"
+                        readonly="true"
+                        placeholder="Filled in after validating the agreement in MetaMask"></input>
+               </div>
+               <div class="form-group">
+                 <label for="fileURL">Agreement URL:</label>
+                 <input class="form-control" type="text" id="fileURL"
+                        defaultValue="https://github.com/TerjeNorderhaug/ai4ai/blob/master/legal_agreement.docx"
+                        value="https://github.com/TerjeNorderhaug/ai4ai/blob/master/legal_agreement.docx"
+                        placeholder="Save agreement to cloud, and input share link here"></input>
+               </div>
+             </div>
+             <div class="modal-footer">
+               <button class="btn btn-primary btn-block" id="sign"
+                       type="button" role="button"
+                       disabled="true"
+                       onclick="App.signAgreement()">
+                 Sign Agreement
+               </button>
+             </div>
            </div>
          </div>
        </div>
-
      </div>
 
-
-       <!-- Loyality Token Panel (top level) -->
+     <!-- Loyality Token Panel (top level) -->
      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-       <div class="card" id="loyaltyTokenPanel">
-         <div class="card-body">
-           <!-- <h3 class="card-title">Loyalty Token Management</h3>-->
+       <div id="loyaltyTokenPanel">
+         <div>
            <div class="row">
              <div class="col" id="tokenInitialization">
                <div class="card">
+                 <div class="card-header">
+                   <h4 class="card-title">Loyalty Token Initialization</h4>
+                 </div>
                  <div class="card-body">
-                   <h5 class="card-title">Loyalty Token Initialization</h5>
                    <label for="initSupply">Total Supply:</label>
                    <input class="form-control" type="text" id="initSupply" placeholder="e.g., 1000000"></input>
                    <div class="form-group">
@@ -159,31 +162,45 @@ Copyright: BlockTEST LLC
 
              <div class="col">
                <div class="card">
+                 <div class="card-header">
+                   <h4 class="card-title">Token Availability</h4>
+                 </div>
                  <div class="card-body">
-                   <h4 class="card-title">General Information:</h4>
-                   <p>Total Supply: <span id="totalSupply"></span></p>
-                   <p>Bonus Tokens: <span id="bonusToken"></span></p>
+                   <ul class="list-group list-group-flush">
+                     <li class="list-group-item">
+                       Total Supply: <span id="totalSupply"></span></li>
+                     <li class="list-group-item">
+                       Bonus Tokens: <span id="bonusToken"></span></li>
+                   </ul>
                  </div>
                </div>
                <div class="card">
+                 <div class="card-header">
+                   <h4 class="card-title">Account</h4>
+                 </div>
                  <div class="card-body">
-                   <h4 class="card-title">Account Information:</h4>
-                   <p>Account: <span id="accountAddress"></span></p>
-                   <p>Balance: <span id="accountBalance"></span></p>
+                   <ul class="list-group list-group-flush">
+                     <li class="list-group-item">
+                       Account: <span id="accountAddress"></span></li>
+                     <li class="list-group-item">
+                       Balance: <span id="accountBalance"></span></li>
+                   </ul>
                  </div>
                </div>
                <div class="card">
+                 <div class="card-header">
+                   <h4 class="card-title">Reward Contributor</h4>
+                 </div>
                  <div class="card-body">
-                   <h4 class="card-title">Send Loyalty Tokens</h4>
                    <div class="form-group">
-                     <label for="amount">Amount:</label>
+                     <label for="amount">Amount Tokens:</label>
                      <input class="form-control" type="text" id="amount" placeholder="e.g., 100"></input>
                      <label for="receiver">To Address:</label>
                      <input class="form-control" type="text" id="receiver"
                             placeholder="e.g., 0xdf8114c4f533f72ea1bafafb7ca1836c54dbd3cc"></input>
                    </div>
                    <button class="btn btn-secondary" id="sendToken"
-                           onclick="App.sendLoyaltyToken()">Send Loyalty Token</button>
+                           onclick="App.sendLoyaltyToken()">Send</button>
                  </div>
                </div>
              </div>
@@ -195,56 +212,74 @@ Copyright: BlockTEST LLC
      <!-- Tasks Pane -->
      <div class="tab-pane fade" role="tabpanel" aria-labelledby="tasks-tab"
           id="tasks-pane">
-       <div class="card" id="taskManagementPanel">
-         <div class="card-body">
-           <h1 class="card-title">Task Management</h1>
-           <div id="taskInitialization">
-             <h4>Initialization:</h4>
-             <div class="form-group">
-               <label for="initSupply">Tool Name:</label>
-               <input class="form-control" type="text" id="initToolName" placeholder="e.g., ADMET"></input>
-               <label for="initPlayerSalary">Player Salary:</label>
-               <input class="form-control" type="text" id="initPlayerSalary"
-                      placeholder="Unit: ETH, e.g., 1"></input>
+       <div id="taskManagementPanel">
+         <div>
+           <div class="card" id="taskInitialization">
+             <div class="card-header">
+               <h4 class="card-title">Task Initialization</h4>
              </div>
-             <button class="btn btn-primary" id="initTask"
-                     onclick="App.initTaskManage()">Initialize Task</button>
+             <div class="card-body">
+               <div class="form-group">
+                 <label for="initSupply">Tool Name:</label>
+                 <input class="form-control" type="text" id="initToolName" placeholder="e.g., ADMET"></input>
+                 <label for="initPlayerSalary">Player Salary:</label>
+                 <input class="form-control" type="text" id="initPlayerSalary"
+                        placeholder="Unit: ETH, e.g., 1"></input>
+               </div>
+               <button class="btn btn-primary" id="initTask"
+                       onclick="App.initTaskManage()">Initialize Task</button>
+             </div>
            </div>
 
-           <div>
-             <h2>General Information:</h2>
-             <p>Task Address: <span id="taskAddress"></span></p>
-             <p>Task Balance: <span id="taskBalance"></span> ETH</p>
-             <p>Task Name: <span id="taskName"></span></p>
-             <p>Tool Name: <span id="toolName"></span></p>
-             <p>Player Salary: <span id="playerSalary"></span> ETH</p>
+           <div class="card">
+             <div class="card-header">
+               <h4 class="card-title">Task</h4>
+             </div>
+             <div class="card-body">
+               <p>Task Address: <span id="taskAddress"></span></p>
+               <p>Task Balance: <span id="taskBalance"></span> ETH</p>
+               <p>Task Name: <span id="taskName"></span></p>
+               <p>Tool Name: <span id="toolName"></span></p>
+               <p>Player Salary: <span id="playerSalary"></span> ETH</p>
+             </div>
            </div>
 
-           <div>
-             <h2>List of Tool Players:</h2>
+           <div class="card">
+             <div class="card-header">
+               <h4 class="card-title">Contributors</h4>
+             </div>
              <ul id="playerList"></ul>
            </div>
 
-           <div>
-             <h2>List of Data Requests:</h2>
+           <div class="card">
+             <div class="card-header">
+               <h4 class="card-title">Data Requests</h4>
+             </div>
              <ul id="dataReqPool"></ul>
            </div>
 
-           <div class="form-group">
-             <label for="dataAccessCode">Data Access Code:</label>
-             <div class="input-group mb-3">
-               <input class="form-control" type="text" id="dataAccessCode"
-                      placeholder="If you don't have one, click generate"></input>
-               <div class="input-group-append">
-                 <button class="btn btn-secondary" id="generateDataCode"
-                         onclick="App.generateDataCode()">Generate Code</button>
+           <div class="card">
+             <div class="card-header">
+               <h4 class="card-title">Data Access</h4>
+             </div>
+             <div class="card-body">
+               <div class="form-group">
+                 <label for="dataAccessCode">Data Access Code:</label>
+                 <div class="input-group mb-3">
+                   <input class="form-control" type="text" id="dataAccessCode"
+                          placeholder="If you don't have one, click generate"></input>
+                   <div class="input-group-append">
+                     <button class="btn btn-secondary" id="generateDataCode"
+                             onclick="App.generateDataCode()">Generate Code</button>
+                   </div>
+                 </div>
+                 <label for="comPublicKey">Public Key:</label>
+                 <input class="form-control" type="text" id="comPublicKey" readonly="true"></input>
+                 <label for="playerId">Player ID:</label>
+                 <input class="form-control" type="text" id="playerId"
+                        placeholder="Player ID to be approved"></input>
                </div>
              </div>
-             <label for="comPublicKey">Public Key:</label>
-             <input class="form-control" type="text" id="comPublicKey" readonly="true"></input>
-             <label for="playerId">Player ID:</label>
-             <input class="form-control" type="text" id="playerId"
-                    placeholder="Player ID to be approved"></input>
            </div>
          </div>
        </div>
@@ -317,95 +352,138 @@ Copyright: BlockTEST LLC
          </div>
        </div>
 
-       <div class="card" id="taskOwnerPanel">
-         <div class="card-body">
+       <div id="taskOwnerPanel">
+         <div>
            <div>
-             <div class="card-title">For Task Owner:</div>
-
+             <!-- For Task Owner: -->
              <div class="card" id="ownerEncryptPanel">
-               <p class="card-header">
-               Step 1: Generate data access code, enter player id,
-               encrypt input data, upload encrypted data to cloud,
-               then approve player request.</p>
-
-               <button class="btn btn-primary" id="getOwnerEncryptCode"
-                       onclick="App.getEncryptCode()">Locate Data Request</button>
-               <div class="form-group">
-                 <label for="ownerEncryptCode">Data Encrypt Code:</label>
-                 <input class="form-control" type="text" id="ownerEncryptCode"
-                        readonly="true" placeholder="Obtained from blockchain"></input>
-                 <div class="custom-file">
-                   <label class="custom-file-label" for="openDataFile">Data File:</label>
-                   <input class="custom-file-input" type="file" id="openDataFile" accept="*.*"
-                          onChange="App.openDataFile(event)"></input>
-                 </div>
+               <div class="card-header">
+                 <h4 class="card-title">Step 1</h4>
+                 <div class="alert alert-info">
+                   Task owner should generate data access code, enter player id,
+                   encrypt input data, upload encrypted data to cloud,
+                   then approve contributor's request.</div>
                </div>
+               <div class="card-body">
+                 <label for="ownerEncryptCode">Data Encrypt Code:</label>
+                 <div class="input-group">
+                   <div class="input-group-prepend">
+                     <button class="btn btn-primary" id="getOwnerEncryptCode"
+                             onclick="App.getEncryptCode()">Locate Data Request</button>
+                   </div>
+                   <input class="form-control" type="text" id="ownerEncryptCode"
+                          readonly="true" placeholder="Obtained from blockchain"></input>
+                 </div>
+                 <p>
+                   <div class="form-group">
+                     <div class="custom-file">
+                       <label class="custom-file-label" for="openDataFile">Data File:</label>
+                       <input class="custom-file-input" type="file" id="openDataFile" accept="*.*"
+                              onChange="App.openDataFile(event)"></input>
+                     </div>
+                   </div>
+                 </p>
 
-               <button class="btn btn-primary" id="encryptDataFile"
-                       onclick="App.encryptDataFile()">Encrypt Data</button>
-               <label for="ownerDataEncryptHash">Encrypted Data Hash:</label>
-               <input class="btn btn-primary" type="text" id="ownerDataEncryptHash"
-                      readonly="true" placeholder="will show after encrypting data"></input>
-               <label for="ownerDataEncryptURL">Data Cloud URL:</label>
-               <input class="form-control" type="text" id="ownerDataEncryptURL"
-                      placeholder="Save encrypted file to cloud, and input share link here"></input>
+                 <p>
+                   <label for="ownerDataEncryptHash">Encrypted Data Hash:</label>
+                   <div class="input-group">
+                     <div class="input-group-prepend">
+                       <button class="btn btn-primary" id="encryptDataFile"
+                               onclick="App.encryptDataFile()">Encrypt Data</button>
+                     </div>
+                     <input class="btn btn-primary" type="text" id="ownerDataEncryptHash"
+                            readonly="true" placeholder="will show after encrypting data"></input>
+                   </div>
+                 </p>
 
-               <button class="btn btn-primary" id="approvePlayerRequest"
-                       onclick="App.approvePlayerRequest()">
-                 Approve Player Request</button>
-
+                 <p>
+                   <label for="ownerDataEncryptURL">Data Cloud URL:</label>
+                   <div class="form-group">
+                     <input class="form-control" type="text" id="ownerDataEncryptURL"
+                            placeholder="Save encrypted file to cloud, and input share link here"></input>
+                     <button class="btn btn-primary" id="approvePlayerRequest"
+                             onclick="App.approvePlayerRequest()">
+                       Approve Player Request</button>
+                   </div>
+                 </p>
+               </div>
              </div>
 
-             <div class="card card">
-               <p class="card-header">
-                 Step 2: enter data access code and player id,
-                 locate result data, decrypt result data,
-                 validate result with the value,
-                 then approve/reject player result.</p>
-               <div id="ownerDecryptPanel">
-                 <button class="btn btn-primary" id="getDataInfo"
-                         onclick="App.getDataInfo()">Locate Result Data</button>
-                 <div class="form-group">
-                   <label for="ownerDataDecryptURL">Data Cloud URL:</label>
-                   <input class="form-control" type="text" id="ownerDataDecryptURL" readonly="true"
-                          placeholder="will show after encrypting data"></input>
-                   <label for="ownerDataDecryptHash">Encrypted Data Hash:</label>
-                   <input class="form-control" type="text" id="ownerDataDecryptHash" readonly="true"
-                          placeholder="will show after encrypting data"></input>
-                 </div>
-                 <div class="custom-file">
-                   <label class="custom-file-label" for="openEncryptedFile">Data File:</label>
-                   <input class="custom-file-input" type="file" id="openEncryptedFile" accept="*.*"
-                          onChange="App.openDataFile(event)"></input>
-                 </div>
-                 <button class="btn btn-primary" id="decryptDataFile"
-                         onclick="App.decryptDataFile()">Decrypt Data</button>
+             <div class="card">
+               <div class="card-header">
+                 <h4 class="card-title">Step 2</h4>
+                 <div class="alert alert-info">
+                   Task owner should enter data access code and player id,
+                   locate result data, decrypt result data,
+                   validate result with the value,
+                   then approve/reject player result.</div>
                </div>
+               <div class="card-body">
+                 <div id="ownerDecryptPanel">
 
-               <div>
-               <label for="ownerResult">Result Value:</label>
-               <input class="form-control" type="text" id="ownerResult" readonly="true"
-                      placeholder="will show after encrypting data"></input>
-               <button class="btn btn-primary" id="approvePlayerResult"
-                       onclick="App.approvePlayerResult()">Approve Player Result</button>
-               <button class="btn btn-primary" id="rejectPlayerResult"
-                       onclick="App.rejectPlayerResult()">Reject Player Result</button>
+                   <label for="ownerDataDecryptURL">Data Cloud URL:</label>
+                   <div class="input-group">
+                     <button class="btn btn-primary" id="getDataInfo"
+                             onclick="App.getDataInfo()">Locate Result Data</button>
+                     <input class="form-control" type="text" id="ownerDataDecryptURL" readonly="true"
+                            placeholder="URL of data to decrypt"></input>
+                   </div>
+
+                   <!--<label for="ownerDataDecryptHash">Encrypted Data Hash:</label>-->
+                   <p>
+                     <div class="input-group">
+                       <div class="input-group-prepend">
+                         <span class="input-group-text">Decrypt Hash</span>
+                       </div>
+                       <input class="form-control" type="text" id="ownerDataDecryptHash" readonly="true"
+                              placeholder="will show after decrypting data"></input>
+                     </div>
+                   </p>
+
+                   <p>
+                     <div class="custom-file">
+                       <label class="custom-file-label" for="openEncryptedFile">Data File:</label>
+                       <input class="custom-file-input" type="file" id="openEncryptedFile" accept="*.*"
+                              onChange="App.openDataFile(event)"></input>
+                     </div>
+                   </p>
+
+                   <p>
+                     <label for="ownerResult">Contributor Result Value:</label>
+                     <div class="input-group">
+                       <button class="btn btn-primary" id="decryptDataFile"
+                               onclick="App.decryptDataFile()">Decrypt Data</button>
+
+                       <input class="form-control" type="text" id="ownerResult" readonly="true"
+                              placeholder="will show after decrypting data"></input>
+                     </div>
+                   </p>
+
+                   <p>
+                     <div class="input-group">
+                       <button class="btn btn-danger" id="rejectPlayerResult"
+                               style="margin-right: 1em"
+                               onclick="App.rejectPlayerResult()">Reject</button>
+                       <button class="btn btn-success" id="approvePlayerResult"
+                               onclick="App.approvePlayerResult()">Approve</button>
+                     </div>
+                   </p>
+                 </div>
                </div>
              </div>
            </div>
          </div>
        </div>
      </div>
-
      <div style="height: 10em">&nbsp</div>
    </div>
 
    <footer class="fixed-bottom" style="padding-bottom:0">
      <div class="alert alert-warning center alert-dismissible fade show" role="alert"
           style="margin-bottom:0">
-       <span class="hint">
+       <!-- <span class="hint">
          <strong>Status: </strong>
-       </span>
+       </span> -->
        <span id="status"></span>
        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
          <span aria-hidden="true">&times;</span>
@@ -413,7 +491,6 @@ Copyright: BlockTEST LLC
      </div>
    </footer>
 
- </div>
 
  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
          integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

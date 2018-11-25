@@ -62,8 +62,12 @@ const App = {
   },
 
   setStatus: function (message) {
-    const status = document.getElementById('status')
-    status.innerHTML = message
+      if (message == "") {
+          parent('status').hide();
+      } else {
+          $('#status').text(message);
+          parent('status').show();
+      }
   },
 
   checkAgreementStatus: function() {
@@ -73,35 +77,34 @@ const App = {
       legitInstance = instance
       return legitInstance.LegiFiles(account)
     }).then(function (result) {
-      if (result[4]) {
-        const legiStatus = document.getElementById('legiStatus')
-        legiStatus.innerHTML = "You have signed the agreement for using the Drug R&D Ecosystem!"
-        /* legiStatus.style.backgroundColor = "#CCFFCC" */
+        if (result[4]) {
+            self.setStatus("You have signed the agreement for using the Drug R&D Ecosystem!")
+            /* Extract agreement info from blockchain */
+            $("#sign").prop("disabled", true);
+            document.getElementById('hashCode').value = result[1]
+            document.getElementById('hashSign').value = result[2]
+            const fileURL = document.getElementById('fileURL')
+            fileURL.value = result[0]
+            fileURL.readOnly = true
 
-        /* Extract agreement info from blockchain */
-        document.getElementById('sign').disabled = true
-        document.getElementById('hashCode').value = result[1]
-        document.getElementById('hashSign').value = result[2]
-        const fileURL = document.getElementById('fileURL')
-        fileURL.value = result[0]
-        fileURL.readOnly = true
+            document.getElementById('loyaltyTokenPanel').style.display = 'inline'
+            document.getElementById('taskManagementPanel').style.display = 'inline'
+        }
+        else {
+            self.setStatus("Please sign agreement before using the Drug R&D Ecosystem!")
+            document.getElementById('hashCode').value = ""
+            document.getElementById('hashSign').value = ""
+            /*document.getElementById('fileURL').value = ""*/
+            $("#sign").prop("disabled", true);
+            $('#legitimationPanel').modal('show');
 
-        document.getElementById('loyaltyTokenPanel').style.display = 'inline'
-        document.getElementById('taskManagementPanel').style.display = 'inline'
-      }
-      else {
-        const legiStatus = document.getElementById('legiStatus')
-        legiStatus.innerHTML = "Please sign agreement before using the Drug R&D Ecosystem!"
-        document.getElementById('hashCode').value = ""
-        document.getElementById('hashSign').value = ""
-        /*document.getElementById('fileURL').value = ""*/
-
-        document.getElementById('loyaltyTokenPanel').style.display = 'none'
-        document.getElementById('taskManagementPanel').style.display = 'none'
-      }
+            document.getElementById('loyaltyTokenPanel').style.display = 'none'
+            document.getElementById('taskManagementPanel').style.display = 'none'
+        }
     }).catch(function (e) {
-      console.log(e)
-      self.setStatus('Error checking legitimation status; see log.')
+        console.log(e)
+        $('#legitimationPanel').modal('show');
+        self.setStatus('Error checking legitimation status; see log.')
     })
   },
 
@@ -120,10 +123,13 @@ const App = {
     hashCode.value = hashResult
     const hashSign = document.getElementById('hashSign')
     web3.eth.sign(account, "0x" + hashResult, function(error, result) {
-      if(!error)
-        hashSign.value = result;
-      else
-        console.error(error);
+        if(!error) {
+            hashSign.value = result;
+            self.setStatus("Click the sign button and complete the transaction in MetaMask.")
+            $("#sign").prop("disabled", false);
+        }
+        else
+            console.error(error);
     })
   },
 
@@ -133,15 +139,19 @@ const App = {
     const hashCode = document.getElementById('hashCode')
     const hashSign = document.getElementById('hashSign')
 
+    $("#sign").prop("disabled", true);
+    self.setStatus('Waiting for the agreement to be signed on blockchain...')
+
     let legitInstance
     drugTask.deployed().then(function (instance) {
       legitInstance = instance
       return legitInstance.signAgreement(fileURL.value, hashCode.value, hashSign.value, { from: account })
     }).then(function () {
-      self.setStatus('Agreement has been signed on blockchain!')
+        self.setStatus('Agreement has been signed on blockchain!')
+        $('#profile-tab').tab('show')
     }).catch(function (e) {
       console.log(e)
-      self.setStatus('Error signing agreement; see log.')
+      self.setStatus('Error signing agreement. Please restart and try again.')
     })
   },
 
@@ -164,7 +174,7 @@ const App = {
       }
     }).catch(function (e) {
       console.log(e)
-      self.setStatus('Error checking legitimation status; see log.')
+      self.setStatus('Error when authenticating; see log.')
     })
   },
 
