@@ -112,6 +112,8 @@ const App = {
 
             document.getElementById('loyaltyTokenPanel').style.display = 'none'
             document.getElementById('taskManagementPanel').style.display = 'none'
+            $('#profile-tab').prop('disabled', true)
+            $('#tasks-tab').prop('disabled', true)
         }
     }).catch(function (e) {
         console.log(e)
@@ -179,14 +181,14 @@ const App = {
       return loyaltyInstance.isTokenInitialized()
     }).then(function (init) {
       if (init) {
-        document.getElementById('tokenInitialization').style.display = 'none'
+          document.getElementById('tokenInitialization').style.display = 'none'
         document.getElementById('initToken').disabled = true
       }
       return loyaltyInstance.owner()
     }).then(function (owner) {
       if (0 != owner.localeCompare(account)) {
-        document.getElementById('tokenInitialization').style.display = 'none'
-        document.getElementById('initToken').disabled = true
+          document.getElementById('tokenInitialization').style.display = 'none'
+          document.getElementById('initToken').disabled = true
       }
     }).catch(function (e) {
       console.log(e)
