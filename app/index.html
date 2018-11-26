@@ -40,12 +40,12 @@ Copyright: BlockTEST LLC
      <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <div>
        <ul class="navbar-nav nav nav-pills" id="myTab" role="tablist">
-<!--         <li class="nav-item">
+         <li class="nav-item">
            <a class="nav-link active" id="home-tab" data-toggle="tab"
               href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
-         </li> -->
+         </li>
          <li class="nav-item">
-           <a class="nav-link active" id="profile-tab" data-toggle="tab"
+           <a class="nav-link" id="profile-tab" data-toggle="tab"
               href="#profile" role="tab"
               aria-controls="profile" aria-selected="false">Tokens</a>
          </li>
@@ -126,12 +126,11 @@ Copyright: BlockTEST LLC
        </div>
      </div>
 
-     <!-- Authenticate pane -->
-     <!--
-         <div class="tab-pane fade show active" id="home" role="tabpanel"
-              aria-labelledby="home-tab">
-         </div>
-         -->
+     <!-- Home Pane -->
+     <div class="tab-pane fade show active" id="home" role="tabpanel"
+          aria-labelledby="home-tab">
+
+     </div>
 
      <!-- Loyality Token Panel (top level) -->
      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
@@ -173,25 +172,19 @@ Copyright: BlockTEST LLC
                    <h4 class="card-title">Token Availability</h4>
                  </div>
                  <div class="card-body">
-                   <ul class="list-group list-group-flush">
-                     <li class="list-group-item">
-                       Total Supply: <span id="totalSupply"></span></li>
-                     <li class="list-group-item">
-                       Bonus Tokens: <span id="bonusToken"></span></li>
-                   </ul>
+                     Total Supply: <span id="totalSupply"></span><br>
+                     Bonus Tokens: <span id="bonusToken"></span>
                  </div>
                </div>
                <div class="card">
+                 <!--
                  <div class="card-header">
                    <h4 class="card-title">Account</h4>
                  </div>
+                 -->
                  <div class="card-body">
-                   <ul class="list-group list-group-flush">
-                     <li class="list-group-item">
-                       Account: <span id="accountAddress"></span></li>
-                     <li class="list-group-item">
-                       Balance: <span id="accountBalance"></span></li>
-                   </ul>
+                     Account: <span id="accountAddress"></span><br>
+                     Balance: <span id="accountBalance"></span>
                  </div>
                </div>
                <div class="card">
@@ -202,12 +195,16 @@ Copyright: BlockTEST LLC
                    <div class="form-group">
                      <label for="amount">Amount Tokens:</label>
                      <input class="form-control" type="text" id="amount" placeholder="e.g., 100"></input>
-                     <label for="receiver">To Address:</label>
+                   </div>
+                   <label for="receiver">To Address:</label>
+                   <div class="input-group">
                      <input class="form-control" type="text" id="receiver"
                             placeholder="e.g., 0xdf8114c4f533f72ea1bafafb7ca1836c54dbd3cc"></input>
+                     <div class="input-group-append">
+                       <button class="btn btn-success" id="sendToken"
+                               onclick="App.sendLoyaltyToken()">Send</button>
+                     </div>
                    </div>
-                   <button class="btn btn-primary" id="sendToken"
-                           onclick="App.sendLoyaltyToken()">Send</button>
                  </div>
                </div>
              </div>
@@ -219,8 +216,9 @@ Copyright: BlockTEST LLC
      <!-- Tasks Pane -->
      <div class="tab-pane fade" role="tabpanel" aria-labelledby="tasks-tab"
           id="tasks-pane">
-       <div id="taskManagementPanel">
-         <div>
+      <div id="taskManagementPanel">
+       <div class="row">
+         <div class="col-md-6">
            <div class="card" id="taskInitialization">
              <div class="card-header">
                <h4 class="card-title">Task Initialization</h4>
@@ -229,7 +227,7 @@ Copyright: BlockTEST LLC
                <div class="form-group">
                  <label for="initSupply">Tool Name:</label>
                  <input class="form-control" type="text" id="initToolName" placeholder="e.g., ADMET"></input>
-                 <label for="initPlayerSalary">Player Salary:</label>
+                 <label for="initPlayerSalary">Contributor Salary:</label>
                  <input class="form-control" type="text" id="initPlayerSalary"
                         placeholder="Unit: ETH, e.g., 1"></input>
                </div>
@@ -245,12 +243,14 @@ Copyright: BlockTEST LLC
              <div class="card-body">
                <p>Task Address: <span id="taskAddress"></span></p>
                <p>Task Balance: <span id="taskBalance"></span> ETH</p>
-               <p>Task Name: <span id="taskName"></span></p>
-               <p>Tool Name: <span id="toolName"></span></p>
+               <p>Task Name: <span id="taskName"></span><br>
+                  Tool Name: <span id="toolName"></span></p>
                <p>Player Salary: <span id="playerSalary"></span> ETH</p>
              </div>
            </div>
+         </div>
 
+         <div class="col-md-6">
            <div class="card">
              <div class="card-header">
                <h4 class="card-title">Contributors</h4>
@@ -290,6 +290,7 @@ Copyright: BlockTEST LLC
            </div>
          </div>
        </div>
+      </div>
      </div>
 
      <!-- Steps pane -->
@@ -301,10 +302,10 @@ Copyright: BlockTEST LLC
 
              <div class="card">
                <div class="card-header">
-                 <h4 class="card-title">Step 1</h4>
-                 <p class="card-subtitle">
-                   Submit task request
-                 </p>
+                 <h4 class="card-title">
+                   <span class="badge badge-pill badge-info">1</span>
+                   Request Task
+                 </h4>
                </div>
                <div class="card-body">
                  <div class="alert alert-info">Contributor should generate data access code,
@@ -314,10 +315,10 @@ Copyright: BlockTEST LLC
                          onclick="App.submitPlayerRequest()">Request Task</button>
                </div>
                <div class="card-header">
-                 <h4 class="card-title">Step 2</h4>
-                 <p class="card-subtitle">
-                   Retrieve and execute task
-                 </p>
+                 <h4 class="card-title">
+                   <span class="badge badge-pill badge-info">2</span>
+                   Retrieve Task
+                 </h4>
                </div>
                <div class="card-body">
                  <div class="alert alert-info">
@@ -366,10 +367,10 @@ Copyright: BlockTEST LLC
            <div class="col-md-6">
              <div class="card">
                <div class="card-header">
-                 <h4 class="card-title">Step 3</h4>
-                 <p class="card-subtitle">
-                   Submit task result
-                 </p>
+                 <h4 class="card-title">
+                   <span class="badge badge-pill badge-info">3</span>
+                   Provide Task Result
+                 </h4>
                </div>
                <div class="card-body">
                  <div class="alert alert-info">
@@ -435,8 +436,10 @@ Copyright: BlockTEST LLC
              <!-- For Task Owner: -->
              <div class="card" id="ownerEncryptPanel">
                <div class="card-header">
-                 <h4 class="card-title">Step 1</h4>
-                 <p class="card-subtitle">Process request</p>
+                 <h4 class="card-title">
+                   <span class="badge badge-pill badge-info">1</span>
+                   Process Request
+                 </h4>
                </div>
                <div class="card-body">
                  <div class="alert alert-info">
@@ -494,8 +497,10 @@ Copyright: BlockTEST LLC
            <div class="col-md-6">
              <div class="card">
                <div class="card-header">
-                 <h4 class="card-title">Step 2</h4>
-                 <p class="card-subtitle">Process Result</p>
+                 <h4 class="card-title">
+                   <span class="badge badge-pill badge-info">2</span>
+                   Process Result
+                 </h4>
                </div>
                <div class="card-body">
                  <div class="alert alert-info">
