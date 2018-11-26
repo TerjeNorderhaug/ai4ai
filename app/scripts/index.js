@@ -89,10 +89,10 @@ const App = {
       return legitInstance.LegiFiles(account)
     }).then(function (result) {
         if (result[4]) {
-            self.setAuthStatus("Please sign agreement on Ethereum")
+            self.setAuthStatus("Please sign agreement in MetaMask.")
             self.setStatus("You have signed the agreement for using the Drug R&D Ecosystem!")
             /* Extract agreement info from blockchain */
-            $("#sign").prop("disabled", false);
+            $("#sign").prop("disabled", true);
             document.getElementById('hashCode').value = result[1]
             document.getElementById('hashSign').value = result[2]
             const fileURL = document.getElementById('fileURL')
@@ -103,7 +103,7 @@ const App = {
             document.getElementById('taskManagementPanel').style.display = 'inline'
         }
         else {
-            self.setAuthStatus("Please browse to select the legal agreement document.")
+            self.setAuthStatus("Browse to select the legal agreement document.")
             document.getElementById('hashCode').value = ""
             document.getElementById('hashSign').value = ""
             /*document.getElementById('fileURL').value = ""*/
@@ -140,7 +140,7 @@ const App = {
         if(!error) {
             hashSign.value = result;
             $("#sign").prop("disabled", false);
-            App.setAuthStatus("Click the sign button and complete the transaction in MetaMask.");
+            App.setAuthStatus("Add the URL to the uploaded agreement then submit.");
         }
         else
             console.error(error);
