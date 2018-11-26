@@ -112,8 +112,8 @@ const App = {
 
             document.getElementById('loyaltyTokenPanel').style.display = 'none'
             document.getElementById('taskManagementPanel').style.display = 'none'
-            $('#profile-tab').prop('disabled', true)
-            $('#tasks-tab').prop('disabled', true)
+            $('#profile-tab').addClass('disabled')
+            $('#tasks-tab').addClass('disabled')
         }
     }).catch(function (e) {
         console.log(e)
