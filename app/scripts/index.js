@@ -140,7 +140,7 @@ const App = {
         if(!error) {
             hashSign.value = result;
             $("#sign").prop("disabled", false);
-            App.setAuthStatus("Add the URL to the uploaded agreement then submit.");
+            App.setAuthStatus("Add the URL to the uploaded agreement then submit and sign in MetaMask.");
         }
         else
             console.error(error);
@@ -155,17 +155,19 @@ const App = {
 
     $("#sign").prop("disabled", false);
     self.setStatus('Waiting for the agreement to be signed on blockchain...')
-
+    App.setAuthStatus("Sign the complete agreement in MetaMask.");
     let legitInstance
     drugTask.deployed().then(function (instance) {
       legitInstance = instance
       return legitInstance.signAgreement(fileURL.value, hashCode.value, hashSign.value, { from: account })
     }).then(function () {
         self.setStatus('Agreement has been signed on blockchain!')
+        $('#legitimationPanel').modal('hide');
         $('#profile-tab').tab('show')
     }).catch(function (e) {
-      console.log(e)
-      self.setStatus('Error signing agreement. Please restart and try again.')
+        console.log(e)
+        App.setAuthStatus("Failed completing the agreement confirmation. Please reload and try again.");
+        self.setStatus('Error signing agreement. Please restart and try again.')
     })
   },
 
