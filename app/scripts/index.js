@@ -163,7 +163,7 @@ const App = {
     }).then(function () {
         self.setStatus('Agreement has been signed on blockchain!')
         $('#legitimationPanel').modal('hide');
-        $('#profile-tab').tab('show')
+        $('#steps-tab').tab('show')
     }).catch(function (e) {
         console.log(e)
         App.setAuthStatus("Failed completing the agreement confirmation. Please reload and try again.");
