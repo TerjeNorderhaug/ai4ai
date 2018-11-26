@@ -63,12 +63,23 @@ const App = {
 
   setStatus: function (message) {
       if (message == "") {
-          parent('status').hide();
+          $('#status').parent().hide();
       } else {
+          console.log("Status: " + message);
           $('#status').text(message);
-          parent('status').show();
+          $('#status').parent().show();
       }
   },
+
+  setAuthStatus: function (message) {
+        if (message == "") {
+            $('#legiStatus').parent().hide();
+        } else {
+            console.log("Authentication: " + message);
+            $('#legiStatus').text(message);
+            $('#legiStatus').parent().show();
+        }
+    },
 
   checkAgreementStatus: function() {
     const self = this
@@ -78,9 +89,10 @@ const App = {
       return legitInstance.LegiFiles(account)
     }).then(function (result) {
         if (result[4]) {
+            self.setAuthStatus("Please sign agreement on Ethereum")
             self.setStatus("You have signed the agreement for using the Drug R&D Ecosystem!")
             /* Extract agreement info from blockchain */
-            $("#sign").prop("disabled", true);
+            $("#sign").prop("disabled", false);
             document.getElementById('hashCode').value = result[1]
             document.getElementById('hashSign').value = result[2]
             const fileURL = document.getElementById('fileURL')
@@ -91,7 +103,7 @@ const App = {
             document.getElementById('taskManagementPanel').style.display = 'inline'
         }
         else {
-            self.setStatus("Please sign agreement before using the Drug R&D Ecosystem!")
+            self.setAuthStatus("Please browse to select the legal agreement document.")
             document.getElementById('hashCode').value = ""
             document.getElementById('hashSign').value = ""
             /*document.getElementById('fileURL').value = ""*/
@@ -104,7 +116,7 @@ const App = {
     }).catch(function (e) {
         console.log(e)
         $('#legitimationPanel').modal('show');
-        self.setStatus('Error checking legitimation status; see log.')
+        self.setStatus('Failed to authenticate (see log for details).')
     })
   },
 
@@ -117,16 +129,18 @@ const App = {
   },
 
   hashLegalFile: function() {
+    const self = this;
     const content = fileReader.result
     const hashResult = sha256(content)
     const hashCode = document.getElementById('hashCode')
     hashCode.value = hashResult
     const hashSign = document.getElementById('hashSign')
+    App.setAuthStatus("Please sign the transaction in MetaMask.")
     web3.eth.sign(account, "0x" + hashResult, function(error, result) {
         if(!error) {
             hashSign.value = result;
-            self.setStatus("Click the sign button and complete the transaction in MetaMask.")
             $("#sign").prop("disabled", false);
+            App.setAuthStatus("Click the sign button and complete the transaction in MetaMask.");
         }
         else
             console.error(error);
@@ -139,7 +153,7 @@ const App = {
     const hashCode = document.getElementById('hashCode')
     const hashSign = document.getElementById('hashSign')
 
-    $("#sign").prop("disabled", true);
+    $("#sign").prop("disabled", false);
     self.setStatus('Waiting for the agreement to be signed on blockchain...')
 
     let legitInstance
@@ -479,7 +493,7 @@ getDataInfo: function() {
     const initPlayerSalary = parseFloat(document.getElementById('initPlayerSalary').value)
     const totalSalary = web3.toWei(initMaxPlayer*initPlayerSalary, "ether")
 
-    this.setStatus('Initializing task management... (please wait)')
+    self.setStatus('Initializing task management... (please wait)')
 
     let taskInstance
     drugTask.deployed().then(function (instance) {
