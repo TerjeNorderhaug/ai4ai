@@ -38,13 +38,14 @@ const App = {
     // Get the initial account balance so it can be displayed.
     web3.eth.getAccounts(function (err, accs) {
       if (err != null) {
-        alert('There was an error fetching your accounts.')
-        return
+          alert('There was an error fetching your account, possibly missing an Ethereum client.')
+          console.log("Web3 Error: " + err)
+          return
       }
 
       if (accs.length === 0) {
-        alert("Couldn't get any accounts! Make sure your Ethereum client is configured correctly.")
-        return
+          alert("Couldn't get any accounts! Make sure your Ethereum client is configured correctly.")
+          return
       }
 
       accounts = accs
