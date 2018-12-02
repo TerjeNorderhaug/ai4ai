@@ -12,7 +12,7 @@ Assuming docker is installed on your computer and this is your working directory
 
 Wait until the build has completed.
 
-In MetaMask select `Localhost 8545` as Network. Restore password from the seed phrase printed in the log from starting the docker container. Log in using the password.
+In MetaMask select `Localhost 8545` as Network. Restore password from the seed phrase mnemonic printed in the log from starting the docker container. Log in using the password.
 
 From a web browser with MetaMask as plugin, access:
 
